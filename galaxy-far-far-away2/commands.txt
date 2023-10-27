@@ -51,6 +51,21 @@ Part 7
  cd ..
  rm -r tie_fighter_2 && rm -r tie_fighter_3
 
+Part 8
+ cd x_wing/ && touch the_force.txt
+ rm -r ../death_star/
+ cd ..
+ mv millenium_falcon/ yavin_4/ && mv x_wing/ yavin_4/
+
+ git add -A
+
+ git commit -m "Completed lab"
+
+ git push origin main
+
+
+	
+
 
 
 
