@@ -1,0 +1,27 @@
+mkdir galaxy-far-far-away
+cd ./galaxy-far-far-away
+touch commands.txt
+notepad commands.txt
+cd Desktop
+ cd 2023-10-NCR
+ cd galaxy-far-far-away
+mkdir death_star
+cd death_star
+touch darth_vader.txt princess_leia.txt strom_trooper.txt
+cd ..
+ mkdir tatooine 
+cd tatooine
+touch luke.txt && touch ben_kenobi.txt
+mkdir millenium_falcon 
+cd millenium_falcon 
+touch touch han_solo.txt chewbaca.txt
+cd ..
+mv mv ben_kenobi.txt obi_wan.txt
+cd death_star
+cp storm_trooper.txt ~/Desktop/2023-10-NCR/galaxy-far-far-away/tatooine
+cd ..
+mv luke.txt obi_wan.txt ../millenium_falcon/
+
+
+
+
