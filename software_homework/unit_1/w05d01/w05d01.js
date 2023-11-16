@@ -1,51 +1,170 @@
 // Menu data structure
 var menuLinks = [
-    {text: 'about', href: '/about'},
-    {text: 'catalog', href: '/catalog'},
-    {text: 'orders', href: '/orders'},
-    {text: 'account', href: '/account'},
-  ];
+  {text: 'about', href: '/about'},
+  {text: 'catalog', href: '#', subLinks: [
+    {text: 'all', href: '/catalog/all'},
+    {text: 'top selling', href: '/catalog/top'},
+    {text: 'search', href: '/catalog/search'},
+  ]},
+  {text: 'orders', href: '#' , subLinks: [
+    {text: 'new', href: '/orders/new'},
+    {text: 'pending', href: '/orders/pending'},
+    {text: 'history', href: '/orders/history'},
+  ]},
+  {text: 'account', href: '#', subLinks: [
+    {text: 'profile', href: '/account/profile'},
+    {text: 'sign out', href: '/account/signout'},
+  ]},
+];
 
-//   (menuLinks)=>{for( let i=0; i<menuLinks.length; i++){const a = document.createElement('a');
-//   a.href = menuLinks[i].href;
-//   a.textContent = menuLinks[i].textContent;
-//  topMenuEl.appendChild(a) }}
+// 1.0
+const mainEl = document.querySelector('main');
 
+// 1.1
+mainEl.style.backgroundColor = 'var(--main-bg)';
 
+// 1.2
+mainEl.innerHTML = '<h1>WISE Rocks!</h1>';
 
-// Task 1.0 Select and cache the <main> element in a variable named mainEl.
-var mainEl = document.querySelector('main');
+// 1.3
+mainEl.classList.add('flex-ctr');
 
-// Task 1.1 Set the background color of mainElto the value stored in the --main-bgCSS custom property.
-mainEl.style.backgroundColor = "var(--main-bg)";
+// -----------------------------------
 
-// Task 1.2 Set the content of mainElto <h1>SEI Rocks!</h1>
-const h1 = document.createElement('h1');
-h1.textContent = "SEI Rocks!"
-// const node = document.createTextNode("SEI Rocks!");
-// h1.appendChild(node);
-mainEl.appendChild(h1);
-
-// Task 1.3 Add a class of flex-ctrto mainEl.
-mainEl.classList.add("flex-ctr");
-
-// Task 2.0 Select and cache the <nav id="top-menu">element in a variable named topMenuEl.
+// 2.0
 const topMenuEl = document.getElementById('top-menu');
 
-// Task 2.1 Set the height topMenuElelement to be 100%.
-topMenuEl.style.height = "100%";
+// 2.1
+topMenuEl.style.height = '100%';
 
-// Task 2.2 Set the background color of topMenuElto the value stored in the --top-menu-bgCSS custom property.
-topMenuEl.style.backgroundColor = "var(--top-menu-bg)";
+// 2.2
+topMenuEl.style.backgroundColor = 'var(--top-menu-bg)';
 
-// Task 2.3 Add a class of flex-aroundto topMenuEl.
-topMenuEl.classList.add("flex-around");
+// 2.3
+topMenuEl.classList.add('flex-around');
 
-menuLinks.forEach(function(link) {
-    var a = document.createElement('a');
-    a.href = link.href;
-    a.textContent = link.text;
-    topMenuEl.appendChild(a);
-  });
+// -----------------------------------
 
+// 3.0
+// (Menu Data Structure at top)
 
+// 3.1
+for (let link of menuLinks) {
+  const tempEl = document.createElement('a');
+  tempEl.setAttribute('href', link.href)
+  tempEl.textContent = link.text
+  topMenuEl.appendChild(tempEl)
+}
+
+// -----------------------------------
+
+// 4.0
+const subMenuEl = document.getElementById('sub-menu');
+
+// 4.1
+subMenuEl.style.height = '100%';
+
+// 4.2
+subMenuEl.style.backgroundColor = 'var(--sub-menu-bg)';
+
+// 4.3
+subMenuEl.classList.add('flex-around');
+
+// 4.4
+subMenuEl.style.position = 'absolute';
+
+// 4.5
+subMenuEl.style.top = 0;
+
+// -----------------------------------
+
+// 5.0
+// updated MenuLinks at top
+
+// 5.1
+const topMenuLinks = document.querySelectorAll('#top-menu a');
+let showingSubMenu = false;
+
+// 5.2
+topMenuEl.addEventListener('click', function(event) {
+  event.preventDefault();
+  if (event.target.tagName !== 'A') {
+    return;
+  }
+  // console.log(event.target.textContent);
+
+// 5.3
+  if (event.target.classList.contains('active')) {
+    event.target.classList.remove('active');
+    showingSubMenu = false;
+    subMenuEl.style.top = 0;
+    return
+  }
+
+// 5.4
+  for (let link of topMenuLinks) {
+    link.classList.remove('active');
+  }
+
+// 5.5
+  event.target.classList.add('active')
+
+// 5.6
+  let currentLink
+  for (let link of menuLinks) {
+    if (link.text === event.target.textContent) {
+      if (link.subLinks) {
+        showingSubMenu = true;
+      } else {
+        showingSubMenu = false;
+        // (6.4)
+        mainEl.innerHTML = `<h1>${link.text}</h1>`;
+      }
+      currentLink = link;
+    }
+  }
+
+// 5.8
+  const buildSubMenu = (subLinks) => {
+    subMenuEl.textContent = ''
+    for (let link of subLinks) {
+      const tempEl = document.createElement('a');
+      tempEl.setAttribute('href', link.href);
+      tempEl.textContent = link.text;
+      subMenuEl.appendChild(tempEl);
+    }
+  }
+
+// 5.7
+  if (showingSubMenu) {
+    buildSubMenu(currentLink.subLinks);
+    subMenuEl.style.top = '100%';
+  } else {
+    subMenuEl.style.top = 0;
+  }
+
+})
+
+// -----------------------------------
+
+// 6.0
+subMenuEl.addEventListener('click', function(event) {
+  event.preventDefault();
+  if (event.target.tagName !== 'A') {
+    return;
+  }
+  // console.log(event.target.textContent)
+
+// 6.1
+  showingSubMenu = false;
+  subMenuEl.style.top = 0;
+
+// 6.2
+  for (let link of topMenuLinks) {
+    link.classList.remove('active');
+  }
+
+// 6.3
+  mainEl.innerHTML = `<h1>${event.target.textContent}</h1>`
+
+})
