@@ -1,0 +1,11 @@
+.App {
+  text-align: center;
+}
+
+li{list-style: none;
+  color: navy;
+  font-size: larger;
+}
+
+a:link{text-decoration: none;
+}
