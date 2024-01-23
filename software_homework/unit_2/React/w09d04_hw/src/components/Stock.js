@@ -1,8 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-// const Stock = props => {
-//     const stock = props.stockData.filter( d => d.symbol === props.match.params.symbol)[0]
+
 const Stock = ({ stockData }) => {
   const { symbol } = useParams();
   const stock = stockData.find(d => d.symbol === symbol);

@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import React from "react";
+// import stockData from '../stock-data';
+
+// console.log(stockData);
 
 export default function Dashboard(props) {
     let stockData = props.stockData.map((d, i) => {
