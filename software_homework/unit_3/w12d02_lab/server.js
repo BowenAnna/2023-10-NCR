@@ -1,4 +1,5 @@
 const express = require('express');
+const response = require('./models/response.js');
 const app = express();
 
 app.get('/', function(req, res){
@@ -17,6 +18,11 @@ app.get('/tip/:total/:percent', (req, res)=>{
     console.log(req.params);
     res.send("Based on the $"+req.params.total+" total and "+req.params.percent+"% tip, the tip will be $"+req.params.total*(req.params.percent/100))
 })
+
+app.get('/magic/:question', (req, res)=>{
+console.log(req.params);
+res.send(req.params.question + '<br/>'+ response[Math.floor(Math.random()*response.length)]);
+});
 
 app.listen(3000, function() {
     console.log("Listening on the port 3000")
