@@ -21,7 +21,7 @@ app.get('/tip/:total/:percent', (req, res)=>{
 
 app.get('/magic/:question', (req, res)=>{
 console.log(req.params);
-res.send(req.params.question + '<br/>'+ response[Math.floor(Math.random()*response.length)]);
+res.send(req.params.question + "?" + '<br/>'+ `<h1>${response[Math.floor(Math.random()*response.length)]}</h1>`);
 });
 
 app.listen(3000, function() {
