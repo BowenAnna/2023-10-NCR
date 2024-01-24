@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-let bottle_count=5;
+let bottle_count=99;
 
 app.get('/', (req, res)=>{
     res.send(`
