@@ -19,7 +19,7 @@ class Index extends React.Component {
                                     is {character.color} and he/she <br></br>
                                     {character.mainCharacter
                                         ? ` is "Mario's" main character`
-                                        : ` is "Mario's" main character`}
+                                        : ` is not "Mario's" main character`}
                                     <br />
                                 </li>
                             );
