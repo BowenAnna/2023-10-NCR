@@ -2,14 +2,29 @@
   text-align: center;
 }
 
-.display1{
+.starshipcard{
+  width: 600px;
+  margin: 0 auto;
+}
+
+.display{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 200px;
-  height: 70px;
-  color: green;
+  list-style-type: none;
 }
 
-.Link{
+.starship{
+  height: 100px;
+  width: 150px;
+  text-decoration: none;
+  background-color: green;
+  margin: 10px;
+  color: white;
+}
+.ship-display{
+  color: white;
+  text-decoration: none;
+  padding: 5px;
+  margin: 0 auto;
 }
